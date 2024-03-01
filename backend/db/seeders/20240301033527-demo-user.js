@@ -15,23 +15,33 @@ module.exports = {
           username: "Demo-lition",
           hashedPassword: bcrypt.hashSync("password"),
           firstName: "asdfasdf",
-          lastName: "asdaf"
+          lastName: "asdaf",
+          totalPurchases: 0, // Add default value for totalPurchases
+          rewardDiscount: 0, // Add default value for rewardDiscount
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           email: "user1@user.io",
           username: "FakeUser1",
           hashedPassword: bcrypt.hashSync("password2"),
           firstName: "asdfasdf",
-          lastName: "asdaf"
-
+          lastName: "asdaf",
+          totalPurchases: 0,
+          rewardDiscount: 0,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           email: "user2@user.io",
           username: "FakeUser2",
           hashedPassword: bcrypt.hashSync("password3"),
           firstName: "asdfasdf",
-          lastName: "asdaf"
-
+          lastName: "asdaf",
+          totalPurchases: 0,
+          rewardDiscount: 0,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       ],
       {}
@@ -49,3 +59,4 @@ module.exports = {
     );
   },
 };
+

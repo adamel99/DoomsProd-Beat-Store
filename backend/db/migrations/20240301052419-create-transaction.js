@@ -6,42 +6,44 @@ if (process.env.NODE_ENV === 'production') {
 }
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('Transactions', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING(30),
-        allowNull: false,
-        unique: true
-      },
-      email: {
-        type: Sequelize.STRING(255),
-        allowNull: false,
-        unique: true
-      },
-      hashedPassword: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      firstName: { // Add field for first name
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      lastName: { // Add field for last name
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      totalPurchases: {
+      userId: {
         type: Sequelize.INTEGER,
-        defaultValue: 0
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
-      rewardDiscount: {
-        type: Sequelize.DECIMAL(5, 2),
-        defaultValue: 0
+      productId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Products',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      totalAmount: {
+        type: Sequelize.DECIMAL(10, 2),
+        allowNull: false,
+      },
+      paymentStatus: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -56,7 +58,7 @@ module.exports = {
     }, options);
   },
   down: async (queryInterface, Sequelize) => {
-    options.tableName = "Users";
+    options.tableName = "Transactions";
     return queryInterface.dropTable(options);
   }
 };

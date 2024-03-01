@@ -6,42 +6,41 @@ if (process.env.NODE_ENV === 'production') {
 }
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('Products', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING(30),
+      genre: {
+        type: Sequelize.STRING(50),
+        allowNull: true
+      },
+      productName: {
+        type: Sequelize.STRING(255), // Adjust the length as needed
+        allowNull: false
+      },
+      productType: {
+        type: Sequelize.ENUM('Kit', 'Beat', 'Loop'), // Adjust the length as needed
+        allowNull: false
+      },
+      price: {
+        type: Sequelize.DECIMAL(10, 2), // Adjust the precision and scale as needed
+        allowNull: false
+      },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
+      uploadDate: {
+        type: Sequelize.DATE,
         allowNull: false,
-        unique: true
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
-      email: {
-        type: Sequelize.STRING(255),
-        allowNull: false,
-        unique: true
-      },
-      hashedPassword: {
-        type: Sequelize.STRING,
+      filePath: {
+        type: Sequelize.STRING, // Adjust the length as needed
         allowNull: false
-      },
-      firstName: { // Add field for first name
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      lastName: { // Add field for last name
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      totalPurchases: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-      },
-      rewardDiscount: {
-        type: Sequelize.DECIMAL(5, 2),
-        defaultValue: 0
       },
       createdAt: {
         allowNull: false,
@@ -56,7 +55,7 @@ module.exports = {
     }, options);
   },
   down: async (queryInterface, Sequelize) => {
-    options.tableName = "Users";
+    options.tableName = "Products";
     return queryInterface.dropTable(options);
   }
 };
