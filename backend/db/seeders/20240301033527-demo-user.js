@@ -20,6 +20,7 @@ module.exports = {
           rewardDiscount: 0, // Add default value for rewardDiscount
           createdAt: new Date(),
           updatedAt: new Date(),
+          role: 'user'
         },
         {
           email: "user1@user.io",
@@ -31,17 +32,19 @@ module.exports = {
           rewardDiscount: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
+          role: 'user'
         },
         {
-          email: "user2@user.io",
-          username: "FakeUser2",
-          hashedPassword: bcrypt.hashSync("password3"),
-          firstName: "asdfasdf",
-          lastName: "asdaf",
+          email: "adamelh1999@gmail.com",
+          username: "DoomsProd",
+          hashedPassword: bcrypt.hashSync("Track5117"),
+          firstName: "Dooms",
+          lastName: "Prod",
           totalPurchases: 0,
           rewardDiscount: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
+          role: 'admin'
         },
       ],
       {}
@@ -59,4 +62,3 @@ module.exports = {
     );
   },
 };
-

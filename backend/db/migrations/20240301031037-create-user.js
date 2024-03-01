@@ -53,6 +53,11 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
+      role: {
+        type: Sequelize.STRING, // Assuming role is a string
+        allowNull: false,
+        defaultValue: 'user' // Default role for regular users
+      }
     }, options);
   },
   down: async (queryInterface, Sequelize) => {

@@ -52,7 +52,12 @@ module.exports = (sequelize, DataTypes) => {
       rewardDiscount: {
         type: DataTypes.DECIMAL(5, 2),
         defaultValue: 0
-      }
+      },
+      role: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'user', // Default role for regular users
+      },
     },
     {
       sequelize,
