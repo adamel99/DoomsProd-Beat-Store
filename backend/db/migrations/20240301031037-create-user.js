@@ -41,22 +41,22 @@ module.exports = {
       },
       rewardDiscount: {
         type: Sequelize.DECIMAL(5, 2),
-        defaultValue: 0
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       role: {
-        type: Sequelize.STRING, // Assuming role is a string
+        type: Sequelize.ENUM('user', 'admin'), // Assuming role is a string
         allowNull: false,
-        defaultValue: 'user' // Default role for regular users
+        defaultValue: 'user', // Default role for regular users
       }
     }, options);
   },

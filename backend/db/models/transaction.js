@@ -4,7 +4,11 @@ const { Model, DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   class Transaction extends Model {
     static associate(models) {
-      // Define associations with other models if needed
+      // Transaction belongs to a user (buyer)
+      Transaction.belongsTo(models.User, { foreignKey: 'userId' });
+
+      // Transaction belongs to a product
+      Transaction.belongsTo(models.Product, { foreignKey: 'productId' });
     }
   }
 

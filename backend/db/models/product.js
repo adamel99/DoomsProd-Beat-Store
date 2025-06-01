@@ -1,10 +1,12 @@
+// models/product.js
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   class Product extends Model {
     static associate(models) {
-      // Define associations with other models if needed
+      Product.belongsTo(models.User, { foreignKey: 'userId' });
+      Product.hasMany(models.Transaction, { foreignKey: 'productId' });
     }
   }
 
@@ -15,7 +17,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       productType: {
-        type: DataTypes.ENUM('Online', 'In person'),
+        type: DataTypes.ENUM('Beat', 'Loop', 'Kit'),
         allowNull: false,
         validate: {
           notNull: { msg: 'Type is required' },
@@ -51,7 +53,11 @@ module.exports = (sequelize) => {
       genre: {
         type: DataTypes.STRING,
         allowNull: true,
-      }
+      },
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
     {
       sequelize,

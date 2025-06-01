@@ -36,24 +36,30 @@ module.exports = {
       quantity: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        validate: {
+          min: 1,
+        }
       },
       totalAmount: {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
+        validate: {
+          min: 0,
+        }
       },
       paymentStatus: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.ENUM('Completed', 'Pending', 'Processing'),
         allowNull: false,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
     }, options);
   },

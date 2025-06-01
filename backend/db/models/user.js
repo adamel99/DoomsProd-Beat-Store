@@ -1,68 +1,67 @@
 'use strict';
-const { Model, Validator } = require('sequelize');
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // User.hasMany(models.Group, { foreignKey: 'organizerId' })
+      User.hasMany(models.Product, { foreignKey: 'userId' });
+      User.hasMany(models.Transaction, { foreignKey: 'userId' });
     }
   };
 
   User.init(
     {
       username: {
-        type: DataTypes.STRING(50), // Change the length to 50
+        type: DataTypes.STRING(50),
         allowNull: false,
         validate: {
-          len: [4, 50], // Update the length validation
-          isNotEmail(value) {
-            if (Validator.isEmail(value)) {
-              throw new Error("Cannot be an email.");
-            }
-          }
-        }
+          len: [4, 50],
+        },
       },
       email: {
-        type: DataTypes.STRING(255), // Change the length to 255
+        type: DataTypes.STRING(255),
         allowNull: false,
         validate: {
-          len: [3, 255], // Update the length validation
-          isEmail: true
-        }
+          len: [3, 255],
+          isEmail: {
+            msg: "Invalid email format.",
+          },
+        },
       },
       hashedPassword: {
-        type: DataTypes.STRING.BINARY, // Remove .BINARY to match the discussed schema
+        type: DataTypes.STRING.BINARY,
         allowNull: false,
         validate: {
-          len: [60, 60]
-        }
+          len: [60, 60],
+        },
       },
       firstName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       lastName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       totalPurchases: {
         type: DataTypes.INTEGER,
-        defaultValue: 0
+        defaultValue: sequelize.literal('0'),
       },
       rewardDiscount: {
         type: DataTypes.DECIMAL(5, 2),
-        defaultValue: 0
+        defaultValue: sequelize.literal('0.00'),
       },
       role: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: 'user', // Default role for regular users
+        defaultValue: 'user',
       },
     },
     {
       sequelize,
-      modelName: 'User'
+      modelName: 'User',
     }
   );
+
   return User;
 };

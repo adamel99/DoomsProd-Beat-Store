@@ -1,9 +1,9 @@
 "use strict";
-const bcrypt = require("bcryptjs");
 let options = {};
 if (process.env.NODE_ENV === "production") {
   options.schema = process.env.SCHEMA; // define your schema in options object
 }
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     options.tableName = "Products";
@@ -19,7 +19,8 @@ module.exports = {
           filePath: "/path/to/demo-beat-1.mp3",
           createdAt: new Date(),
           updatedAt: new Date(),
-          genre: 'Drill'
+          genre: 'Drill',
+          userId: 3, // Replace with your admin user's ID
         },
         {
           productName: "Demo Loop 1",
@@ -30,7 +31,8 @@ module.exports = {
           filePath: "/path/to/demo-loop-1.zip",
           createdAt: new Date(),
           updatedAt: new Date(),
-          genre: 'Jersey'
+          genre: 'Jersey',
+          userId: 3,
         },
         {
           productName: "Demo Kit 1",
@@ -41,7 +43,8 @@ module.exports = {
           filePath: "/path/to/demo-kit-1.zip",
           createdAt: new Date(),
           updatedAt: new Date(),
-          genre: 'R&B Drill'
+          genre: 'R&B Drill',
+          userId: 3,
         },
       ],
       {}

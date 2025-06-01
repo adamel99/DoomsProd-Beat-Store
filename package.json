@@ -23,5 +23,10 @@
     "url": "https://github.com/adamel99/DoomsProd-Beat-Store/issues"
   },
   "homepage": "https://github.com/adamel99/DoomsProd-Beat-Store#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8"
+  }
 }
