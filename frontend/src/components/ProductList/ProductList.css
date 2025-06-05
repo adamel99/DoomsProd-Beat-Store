@@ -1,0 +1,25 @@
+.products-view {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  padding: 80px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.products-list {
+  width: 100%;
+  max-width: 1300px;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.products-title {
+  grid-column: 1 / -1;
+  font-size: 3rem;
+  text-align: center;
+  color: #00e5ff;
+  text-shadow: 0 0 10px #00e5ff;
+  margin-bottom: 40px;
+  font-weight: bold;
+}

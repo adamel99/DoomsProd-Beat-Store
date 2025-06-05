@@ -7,8 +7,10 @@ import ProductList from "./components/ProductList/ProductList";
 import ProductCard from "./components/ProductCard/ProductCard";
 import LoginFormModal from "./components/LoginFormModal";
 import SignUpFormModal from "./components/SignUpFormModal/index";
-import { restoreUser } from "./store/session";
 import AboutMe from "./components/AboutME/AboutMe";
+import Skills from "./components/Skills/Skills"; // 🆕
+
+import { restoreUser } from "./store/session";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +42,9 @@ function App() {
           </Route>
           <Route exact path="/about">
             <AboutMe />
+          </Route>
+          <Route exact path="/skills"> 
+            <Skills />
           </Route>
         </Switch>
       )}

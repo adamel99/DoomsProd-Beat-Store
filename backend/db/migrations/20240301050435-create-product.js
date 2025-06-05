@@ -15,7 +15,7 @@ module.exports = {
         allowNull: false,
       },
       productType: {
-        type: Sequelize.ENUM('Beat', 'Loop', 'Kit'),
+        type: Sequelize.ENUM('Beat', 'Loop', 'Kit', 'VST/SU Plugin', 'Full Stack Website'),
         allowNull: false,
         validate: {
           notNull: { msg: 'Type is required' },
@@ -23,7 +23,7 @@ module.exports = {
       },
       price: {
         type: Sequelize.DECIMAL(10, 2),
-        allowNull: false,
+        allowNull: true,
       },
       description: {
         type: Sequelize.TEXT,
@@ -36,7 +36,7 @@ module.exports = {
       },
       filePath: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,
