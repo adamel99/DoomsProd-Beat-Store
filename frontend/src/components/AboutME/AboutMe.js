@@ -1,4 +1,3 @@
-// AboutMe.js
 import React from "react";
 import {
   Container,
@@ -10,20 +9,22 @@ import {
   Grid,
   Link as MuiLink,
   Button,
+  useTheme,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-// import PersonIcon from "@mui/icons-material/Person";
 
 
-const glassStyle = {
-  backdropFilter: "blur(10px)",
-  background: "rgba(255, 255, 255, 0.08)",
-  border: "1px solid rgba(255, 255, 255, 0.2)",
-  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
-  borderRadius: 4,
-};
+
 
 const AboutMe = () => {
+  const theme = useTheme(); // get access to your theme
+  const glassStyle = {
+    backdropFilter: "blur(10px)",
+    background: theme.palette.background.paper, // use theme paper bg
+    border: `1px solid ${theme.palette.divider}`, // use theme divider color
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+    borderRadius: 4,
+  };
   const sections = [
     {
         title: "About Me",
@@ -55,11 +56,11 @@ const AboutMe = () => {
   return (
     <Box
       sx={{
-        background: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+        background: `linear-gradient(135deg, ${theme.palette.background.default}, #203a43, #2c5364)`, // use theme background.default dynamically
         minHeight: "100vh",
-        color: "#fff",
-        py: 10,
-        px: 2,
+        color: theme.palette.text.primary,
+        py: theme.spacing(10),
+        px: theme.spacing(2),
       }}
     >
       <Container maxWidth="md">
@@ -70,12 +71,10 @@ const AboutMe = () => {
             sx={{
               width: 140,
               height: 140,
-              boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
-              border: "3px solid #00bcd4",
+              boxShadow: theme.shadows[5], // use theme shadows
+              border: `3px solid ${theme.palette.primary.main}`,
             }}
-          >
-            {/* <PersonIcon fontSize="large" /> */}
-          </Avatar>
+          />
         </Box>
 
         <Grid container spacing={4}>
@@ -87,14 +86,17 @@ const AboutMe = () => {
                     variant="h5"
                     sx={{
                       fontWeight: "bold",
-                      color: "#00e5ff",
+                      color: theme.palette.primary.light, // theme primary light
                       mb: 1,
-                      textShadow: "0 1px 3px rgba(0,0,0,0.7)",
+                      textShadow: `0 1px 3px ${theme.palette.common.black}99`, // black with 60% opacity
                     }}
                   >
                     {section.title}
                   </Typography>
-                  <Typography variant="body1" sx={{ lineHeight: 1.8, color: "#e0f7fa" }}>
+                  <Typography
+                    variant="body1"
+                    sx={{ lineHeight: 1.8, color: theme.palette.text.secondary }}
+                  >
                     {section.body}
                   </Typography>
                 </CardContent>
@@ -104,13 +106,16 @@ const AboutMe = () => {
         </Grid>
 
         <Box mt={6} textAlign="center">
-          <Typography variant="body1" sx={{ mb: 2, color: "#b2ebf2" }}>
+          <Typography
+            variant="body1"
+            sx={{ mb: 2, color: theme.palette.text.secondary }}
+          >
             Want to dive deeper? Check out my{" "}
             <MuiLink
               component={Link}
-              to="/products"
+              to="/skills"
               underline="hover"
-              sx={{ color: "#80deea", fontWeight: "bold" }}
+              sx={{ color: theme.palette.secondary.light, fontWeight: "bold" }}
             >
               projects
             </MuiLink>{" "}
@@ -119,11 +124,10 @@ const AboutMe = () => {
               href="https://github.com/adamel99"
               target="_blank"
               rel="noreferrer"
-              sx={{ color: "#80deea", fontWeight: "bold" }}
+              sx={{ color: theme.palette.secondary.light, fontWeight: "bold" }}
             >
               GitHub profile!
             </MuiLink>
-             
           </Typography>
 
           <Button
@@ -133,14 +137,14 @@ const AboutMe = () => {
             size="large"
             sx={{
               mt: 2,
-              background: "linear-gradient(45deg, #00bcd4, #00838f)",
-              color: "#fff",
+              background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
+              color: theme.palette.common.white,
               fontWeight: "bold",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+              boxShadow: theme.shadows[3],
               px: 4,
               py: 1.5,
               "&:hover": {
-                background: "linear-gradient(45deg, #00acc1, #006064)",
+                background: `linear-gradient(45deg, ${theme.palette.primary.light}, ${theme.palette.primary.main})`,
               },
             }}
           >

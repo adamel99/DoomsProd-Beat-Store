@@ -1,10 +1,11 @@
-body {
+/* body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     color: #e0f7fa;
     min-height: 100vh;
     overflow-x: hidden;
+    padding: 20px;
   }
 
   a {
@@ -14,4 +15,16 @@ body {
 
   a:hover {
     text-decoration: underline;
+  } */
+  a {
+    color: #80deea;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  a {
+    color: #80deea;
+    text-decoration: none;
   }

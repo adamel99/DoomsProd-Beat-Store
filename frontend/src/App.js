@@ -43,7 +43,7 @@ function App() {
           <Route exact path="/about">
             <AboutMe />
           </Route>
-          <Route exact path="/skills"> 
+          <Route exact path="/skills">
             <Skills />
           </Route>
         </Switch>
