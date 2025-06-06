@@ -57,7 +57,7 @@ module.exports = {
         type: Sequelize.ENUM('user', 'admin'), // Assuming role is a string
         allowNull: false,
         defaultValue: 'user', // Default role for regular users
-      }
+      },
     }, options);
   },
   down: async (queryInterface, Sequelize) => {
