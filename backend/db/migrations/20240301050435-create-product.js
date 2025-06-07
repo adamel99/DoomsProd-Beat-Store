@@ -19,7 +19,7 @@ module.exports = {
         allowNull: false,
       },
       productType: {
-        type: Sequelize.ENUM('Beat', 'Loop', 'Kit', 'VST/SU Plugin', 'Full Stack Website'),
+        type: Sequelize.ENUM('Beat', 'Loop', 'Kit', 'VST/AU Plugin', 'Full Stack Website'),
         allowNull: false,
         validate: {
           notNull: { msg: 'Type is required' },
