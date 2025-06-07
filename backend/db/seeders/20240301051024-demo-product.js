@@ -12,7 +12,7 @@ module.exports = {
       [
         {
           productName: "Imagination",
-          productType: "VST/AU Plugin",
+          productType: "VST Plugin",
           price: 0,
           description: "A Stereo Imager Plugin that gives users the ability to manipulate the stereo of any given audio!",
           uploadDate: new Date(),
@@ -36,7 +36,7 @@ module.exports = {
         },
         {
           productName: "Reverb",
-          productType: "VST/AU Plugin",
+          productType: "VST Plugin",
           price: 0,
           description: "A basic Reverb Plugin that gives users the ability to add reverb to any given audio!",
           uploadDate: new Date(),
