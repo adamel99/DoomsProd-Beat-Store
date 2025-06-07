@@ -17,10 +17,14 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       productType: {
-        type: DataTypes.ENUM('Beat', 'Loop', 'Kit', 'VST Plugin', 'Full Stack Website'),
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notNull: { msg: 'Type is required' },
+          isIn: {
+            args: [['Beat', 'Loop', 'Kit', 'VST Plugin', 'Full Stack Website']],
+            msg: 'Invalid product type.',
+          },
         },
       },
       price: {

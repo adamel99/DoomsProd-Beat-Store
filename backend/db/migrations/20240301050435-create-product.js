@@ -19,12 +19,10 @@ module.exports = {
         allowNull: false,
       },
       productType: {
-        type: Sequelize.ENUM('Beat', 'Loop', 'Kit', 'VST Plugin', 'Full Stack Website'),
+        type: Sequelize.STRING,
         allowNull: false,
-        validate: {
-          notNull: { msg: 'Type is required' },
-        },
       },
+
       price: {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: true,
