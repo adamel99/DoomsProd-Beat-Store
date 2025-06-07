@@ -66,10 +66,11 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-    });
+    }, options);
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Products');
+    options.tableName = "Products";
+    return queryInterface.dropTable(options);
   }
 };
