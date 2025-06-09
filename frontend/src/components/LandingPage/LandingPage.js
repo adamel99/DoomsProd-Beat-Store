@@ -105,7 +105,7 @@ const LandingPage = () => {
       <Container sx={{ py: 10 }} maxWidth="lg">
         <Grid container spacing={6} justifyContent="center">
           {[{
-            title: "Explore Products",
+            title: "Explore Projects",
             description: "High-quality beats, sample kits, and exclusive drops ready for your next project.",
             to: "/products",
             color: "#00e5ff",
@@ -126,6 +126,7 @@ const LandingPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
+                <NavLink to={to} style={{ textDecoration: "none", color }}>
                 <Paper
                   elevation={8}
                   sx={{
@@ -145,12 +146,11 @@ const LandingPage = () => {
                   }}
                 >
                   <Typography variant="h5" gutterBottom>
-                    <NavLink to={to} style={{ textDecoration: "none", color }}>
                       {title}
-                    </NavLink>
                   </Typography>
                   <Typography color="text.secondary">{description}</Typography>
                 </Paper>
+                </NavLink>
               </motion.div>
             </Grid>
           ))}
