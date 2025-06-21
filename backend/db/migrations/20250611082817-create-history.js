@@ -1,55 +1,36 @@
-"use strict";
+'use strict';
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Transactions', {
+    return queryInterface.createTable('History', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,  // if some history items are system-generated
         references: {
           model: 'Users',
           key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onDelete: 'SET NULL',
       },
-      productId: {
-        type: Sequelize.INTEGER,
+      actionType: {
+        type: Sequelize.STRING(100),
         allowNull: false,
-        references: {
-          model: 'Products',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
       },
-      quantity: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          min: 1,
-        }
-      },
-      totalAmount: {
-        type: Sequelize.DECIMAL(10, 2),
-        allowNull: false,
-        validate: {
-          min: 0,
-        }
-      },
-      paymentStatus: {
-        type: Sequelize.ENUM('Completed', 'Pending', 'Processing'),
-        allowNull: false,
+      actionDetails: {
+        type: Sequelize.TEXT,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
@@ -63,8 +44,9 @@ module.exports = {
       },
     }, options);
   },
+
   down: async (queryInterface, Sequelize) => {
-    options.tableName = "Transactions";
+    options.tableName = 'History';
     return queryInterface.dropTable(options);
   }
 };

@@ -1,9 +1,10 @@
-"use strict";
+'use strict';
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
@@ -27,11 +28,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      firstName: { // Add field for first name
+      firstName: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      lastName: { // Add field for last name
+      lastName: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -41,25 +42,31 @@ module.exports = {
       },
       rewardDiscount: {
         type: Sequelize.DECIMAL(5, 2),
-        defaultValue: 0,
+        defaultValue: 0.00
+      },
+      isSubscribedToEmails: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+      },
+      role: {
+        type: Sequelize.ENUM('user', 'admin'),
+        allowNull: false,
+        defaultValue: 'user'
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-      },
-      role: {
-        type: Sequelize.ENUM('user', 'admin'), // Assuming role is a string
-        allowNull: false,
-        defaultValue: 'user', // Default role for regular users
-      },
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      }
     }, options);
   },
+
   down: async (queryInterface, Sequelize) => {
     options.tableName = "Users";
     return queryInterface.dropTable(options);

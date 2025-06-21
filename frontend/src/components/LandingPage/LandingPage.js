@@ -10,146 +10,210 @@ import {
   Container,
   Grid,
   Paper,
+  Divider,
+  IconButton,
+  InputBase,
 } from "@mui/material";
-import SignUpFormModal from "../SignUpFormModal";
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { motion } from "framer-motion";
+// import SearchIcon from "@mui/icons-material/Search";
+// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import SignUpFormModal from "../SignUpFormModal";
 
 const LandingPage = () => {
-  const amazingUser = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.session.user);
 
   return (
     <>
-      {/* Navbar */}
+      {/* NAVBAR */}
       <AppBar
         position="sticky"
         color="transparent"
         elevation={0}
         sx={{
           backdropFilter: "blur(12px)",
-          background: "rgba(15, 32, 39, 0.5)",
+          background: "rgba(20, 19, 19, 0.6)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
         }}
       >
-        <Toolbar sx={{ justifyContent: "space-between", px: 3 }}>
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+            px: { xs: 2, md: 6 },
+            minHeight: 72,
+          }}
+        >
           <Typography
             variant="h6"
             sx={{
-              fontWeight: "bold",
+              fontWeight: 900,
+              fontSize: "1.25rem",
               color: "primary.main",
-              letterSpacing: 1,
+              letterSpacing: "1px",
+              textTransform: "uppercase",
             }}
           >
-            Adam's Hub
+            Adam? I don't even know him
           </Typography>
-          {!amazingUser && (
-            <OpenModalMenuItem
-              itemText="Sign Up"
-              modalComponent={<SignUpFormModal />}
-            />
-          )}
+
+          <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+            <NavLink to="/products" style={{ textDecoration: "none" }}>
+              <Button variant="text" color="inherit">
+                Products
+              </Button>
+            </NavLink>
+            <NavLink to="/about" style={{ textDecoration: "none" }}>
+              <Button variant="text" color="inherit">
+                About
+              </Button>
+            </NavLink>
+            <NavLink to="/cart">
+              <Button color="primary">Cart</Button>
+            </NavLink>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                borderRadius: 10,
+                backgroundColor: "rgba(255,255,255,0.05)",
+                px: 1,
+              }}
+            >
+              <InputBase placeholder="Search…" sx={{ ml: 1, color: "inherit" }} />
+              <IconButton sx={{ p: 0.5 }} color="primary">
+                {/* <SearchIcon /> */}
+              </IconButton>
+            </Box>
+            {!user && (
+              <OpenModalMenuItem
+                itemText="Sign Up"
+                modalComponent={<SignUpFormModal />}
+              />
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
 
-      {/* Hero Section */}
+      {/* HERO SECTION */}
       <Box
+        component={motion.div}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
         sx={{
-          py: { xs: 10, md: 16 },
+          py: { xs: 12, md: 18 },
+          backgroundColor: "#141313",
           textAlign: "center",
-          background: "linear-gradient(to bottom, #0f2027 0%, #1a2a33 100%)",
+          color: "text.primary",
         }}
       >
         <Container maxWidth="md">
           <Typography
             variant="h2"
             sx={{
-              fontWeight: 600,
-              letterSpacing: "-0.5px",
-              lineHeight: 1.2,
-              fontSize: { xs: "2rem", md: "3.5rem" },
+              fontWeight: 900,
+              fontSize: { xs: "2.5rem", md: "4rem" },
+              letterSpacing: "-1px",
               textTransform: "uppercase",
-              color: "white",
+              lineHeight: 1.15,
             }}
           >
-            EXPLORE // CREATE // PROTECT
+            // Invest // In // Your // Sound
           </Typography>
           <Typography
             variant="h6"
-            sx={{ color: "text.secondary", mb: 4, mt: 2 }}
+            sx={{
+              mt: 3,
+              color: "text.secondary",
+              fontSize: { xs: "1rem", md: "1.25rem" },
+            }}
           >
-            Dive into development, music production, and plugin innovation.
+            Studio-quality beats and samples for artists ready to grow.
           </Typography>
-          {!amazingUser && (
+          {!user && (
             <Button
               variant="contained"
               sx={{
-                mt: 3,
-                px: 5,
-                py: 1.5,
-                borderRadius: "30px",
-                fontWeight: 600,
-                backgroundColor: "#00e5ff",
-                color: "#000",
+                mt: 5,
+                px: 6,
+                py: 1.8,
+                borderRadius: 99,
+                fontWeight: 700,
+                fontSize: "1rem",
+                background: "linear-gradient(135deg, #ff4081, #ff6699)",
+                boxShadow: "0 8px 30px rgba(255, 64, 129, 0.3)",
                 "&:hover": {
-                  backgroundColor: "#00bcd4",
+                  background: "linear-gradient(135deg, #ff6699, #ff4081)",
                 },
               }}
-              onClick={() => document.querySelector("#cta-footer").scrollIntoView({ behavior: "smooth" })}
+              onClick={() =>
+                document.querySelector("#cta-footer")?.scrollIntoView({ behavior: "smooth" })
+              }
             >
-              Join the Magic
+              Join the Vibe
             </Button>
           )}
         </Container>
       </Box>
 
-      {/* Feature Cards */}
+      <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.05)" }} />
+
+      {/* FEATURE CARDS */}
       <Container sx={{ py: 10 }} maxWidth="lg">
         <Grid container spacing={6} justifyContent="center">
-          {[{
-            title: "Explore Projects",
-            description: "High-quality beats, sample kits, and exclusive drops ready for your next project.",
-            to: "/products",
-            color: "#00e5ff",
-          }, {
-            title: "About the Creator",
-            description: "Get to know the vision behind Adam’s Hub — from VSTs to mastering production.",
-            to: "/about",
-            color: "#ff69b4",
-          }, {
-            title: "Skills",
-            description: "Check out the full-stack, plugin dev, and cybersecurity skills that power the hub.",
-            to: "/skills",
-            color: "#64ffda",
-          }].map(({ title, description, to, color }) => (
+          {[
+            {
+              title: "Browse Beats",
+              description:
+                "Exclusive beats across genres. Preview, license, and download instantly.",
+              to: "/products",
+              color: "#ff4081",
+            },
+            {
+              title: "Meet the Creator",
+              description:
+                "Learn about the artist behind the beats and the vision behind the sound.",
+              to: "/about",
+              color: "#ff4081",
+            },
+            {
+              title: "Pick Your License",
+              description:
+                "Explore licensing options and pick what fits your project needs.",
+              to: "/products",
+              color: "#ff4081",
+            },
+          ].map(({ title, description, to, color }) => (
             <Grid item xs={12} md={4} key={title}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <NavLink to={to} style={{ textDecoration: "none", color }}>
-                <Paper
-                  elevation={8}
-                  sx={{
-                    p: 6,
-                    borderRadius: 6,
-                    background: "rgba(255, 255, 255, 0.04)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    backdropFilter: "blur(20px)",
-                    textAlign: "center",
-                    color: color,
-                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                    boxShadow: `0 0 30px ${color}33`,
-                    "&:hover": {
-                      transform: "translateY(-6px)",
-                      boxShadow: `0 12px 40px ${color}55`,
-                    },
-                  }}
-                >
-                  <Typography variant="h5" gutterBottom>
+                <NavLink to={to} style={{ textDecoration: "none" }}>
+                  <Paper
+                    elevation={10}
+                    sx={{
+                      p: 6,
+                      borderRadius: "24px",
+                      background: "rgba(255, 255, 255, 0.03)",
+                      border: "1px solid rgba(255, 255, 255, 0.08)",
+                      backdropFilter: "blur(20px)",
+                      textAlign: "center",
+                      color: "text.primary",
+                      transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                      boxShadow: `0 12px 40px ${color}22`,
+                      "&:hover": {
+                        transform: "translateY(-8px)",
+                        boxShadow: `0 16px 48px ${color}55`,
+                      },
+                    }}
+                  >
+                    <Typography variant="h5" gutterBottom>
                       {title}
-                  </Typography>
-                  <Typography color="text.secondary">{description}</Typography>
-                </Paper>
+                    </Typography>
+                    <Typography color="text.secondary">{description}</Typography>
+                  </Paper>
                 </NavLink>
               </motion.div>
             </Grid>
@@ -157,22 +221,26 @@ const LandingPage = () => {
         </Grid>
       </Container>
 
-      {/* CTA Footer */}
-      {!amazingUser && (
+      {/* CTA FOOTER */}
+      {!user && (
         <Box
           id="cta-footer"
           sx={{
-            background: "linear-gradient(to right, #0f2027, #203a43)",
-            py: 6,
+            background: "linear-gradient(to right, #0e0e0e, #1a1a1a)",
+            py: 8,
             textAlign: "center",
-            borderTop: "1px solid rgba(255,255,255,0.1)",
+            borderTop: "1px solid rgba(255,255,255,0.08)",
           }}
         >
-          <Typography variant="h5" gutterBottom sx={{ color: "#80deea" }}>
-            Ready to explore?
+          <Typography
+            variant="h5"
+            gutterBottom
+            sx={{ color: "primary.main", fontWeight: 700, fontSize: "1.5rem" }}
+          >
+            Ready to license your next hit?
           </Typography>
           <OpenModalMenuItem
-            itemText="Create an account!"
+            itemText="Create an account"
             modalComponent={<SignUpFormModal />}
             className="cta-btn"
           />

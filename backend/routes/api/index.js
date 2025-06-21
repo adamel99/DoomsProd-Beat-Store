@@ -3,11 +3,12 @@ const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const productsRouter = require('./products.js');
-// const venuesRouter = require('./venues.js')
-// const eventsRouter = require('./events.js')
-// const groupimagesRouter = require('./group-images.js')
-// const eventimagesRouter = require('./event-images.js')
-// const membershipsRouter = require('./membership.js')
+const ordersRouter = require('./orders');
+const licensesRouter = require('./licenses');
+const historyRouter = require('./history');
+const EmailLogRouter = require('./emailLogs');
+const cartsRouter = require('./carts');
+
 
 
 const { restoreUser } = require("../../utils/auth.js");
@@ -25,15 +26,17 @@ router.use('/users', usersRouter);
 
 router.use('/products', productsRouter);
 
-// router.use('/venues', venuesRouter)
+router.use('/orders', ordersRouter);
 
-// router.use('/events', eventsRouter);
+router.use('./carts', cartsRouter);
 
-// router.use('/group-images', groupimagesRouter)
+router.use('./emailLogs', EmailLogRouter);
 
-// router.use('/event-images', eventimagesRouter)
+router.use('./history', historyRouter);
 
-// router.use('/memberships', membershipsRouter);
+router.use('./licenses', licensesRouter);
+
+
 
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });

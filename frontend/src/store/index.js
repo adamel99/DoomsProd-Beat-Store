@@ -2,13 +2,20 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { thunk } from "redux-thunk";
 import productsReducer from "./products";
 import sessionReducer from "./session";
-// import groupsReducer from "./groups";
-// import eventsReducer from "./events";
+import cartsReducer from "./carts";
+import emailLogsReducer from "./emailLogs";
+import ordersReducer from "./orders";
+import licensesReducer from "./licenses";
+import historyReducer from "./history";
+
 const rootReducer = combineReducers({
   session: sessionReducer,
   products: productsReducer,
-  // groups: groupsReducer,
-  // events: eventsReducer,
+  orders: ordersReducer,
+  licenses: licensesReducer,
+  history: historyReducer,
+  emailLogs: emailLogsReducer,
+  carts: cartsReducer,
 });
 
 let enhancer;

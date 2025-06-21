@@ -1,6 +1,6 @@
 // ProductsReducer.js
 import { csrfFetch } from "./csrf";
-import { thunk } from 'react-redux'
+// import { thunk } from 'react-redux'
 
 const GET_ALL_PRODUCTS = "products/getAllProducts";
 const CREATE_PRODUCT = "products/createProduct";
@@ -34,7 +34,8 @@ export const getAllProductsThunk = () => {
       const data = await res.json();
       console.log("data", data);
 
-      dispatch(getAllProducts(data));
+      // ⬇ Only send products array
+      dispatch(getAllProducts(data.products));
       console.log("allProducts in state:", getState().products.allProducts);
       return data.products;
     } catch (err) {
@@ -43,21 +44,6 @@ export const getAllProductsThunk = () => {
     }
   };
 };
-
-
-// export const ViewAllGroupsThunk = () => {
-//   return async (dispatch) => {
-//       try {
-//           const res = await csrfFetch("/api/groups");
-//           const data = await res.json();
-//           console.log("data", data);
-
-//           dispatch(GetAllGroups(data.Groups));
-//           return data.Groups;
-//       } catch (error) {
-//       }
-//   };
-// };
 
 export const getSingleProductThunk = (productId) => async (dispatch) => {
   try {
@@ -84,6 +70,7 @@ export const createProductThunk = (product) => async (dispatch) => {
     if (res.ok) {
       const newProduct = await res.json();
       dispatch(createProduct(newProduct));
+      await dispatch(getAllProductsThunk()); // ensure re-fetch is awaited
       return newProduct;
     }
   } catch (err) {
@@ -92,23 +79,23 @@ export const createProductThunk = (product) => async (dispatch) => {
   }
 };
 
-export const deleteProductThunk = (productToDelete) => async (dispatch) => {
+export const deleteProductThunk = (productId) => async (dispatch) => {
   try {
-    const res = await csrfFetch(`/api/products/${productToDelete.id}`, {
+    const res = await csrfFetch(`/api/products/${productId}`, {
       method: "DELETE",
     });
 
     if (res.ok) {
-      const message = await res.json();
-      dispatch(deleteProduct(productToDelete));
-      console.log(message);
-      return message;
+      const data = await res.json();
+      dispatch(deleteProduct({ id: productId }));
+      return data;
     }
   } catch (err) {
     console.error(err);
     return err;
   }
 };
+
 
 const initialState = { allProducts: {}, singleProduct: {} };
 

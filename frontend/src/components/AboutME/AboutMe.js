@@ -113,7 +113,7 @@ const AboutMe = () => {
             Want to dive deeper? Check out my{" "}
             <MuiLink
               component={Link}
-              to="/skills"
+              to="/"
               underline="hover"
               sx={{ color: theme.palette.secondary.light, fontWeight: "bold" }}
             >
@@ -132,7 +132,7 @@ const AboutMe = () => {
 
           <Button
             component={Link}
-            to="/skills"
+            to="/"
             variant="contained"
             size="large"
             sx={{
